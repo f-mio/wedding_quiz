@@ -1,37 +1,42 @@
-{%if quiz %}
-    {% for q in quiz %}
-        <div class="quiz-num">
-            <h2 class="quiz-id">{{q.id}}</h2>
-            <div class="quiz-content">
-                <h3 class="quiz-title">{{q.quiz_title}} 【{{q.quiz_category}}】</h3>
-                <span class="quiz-text">　{{q.quiz_text}}</span>
-                {% if q.id == 9 %}
-                    <ul>
-                        <li>A. 10cmの部分同士と2cm同士を同じ方向に貼り合わせる</li>
-                        <li>B. 2cmの部分を逆向きにくっつける</li>
-                        <li>C. 10cmの部分を貼り合わせ、捻って横の部分に接触しないよう,内側から2cm同士を張り合わせる。</li>
-                    </ul>
-                {% endif %}
-                <fieldset class="quiz-choice-field">
-                    <input type="radio" name="{{q.id}}quiz-choice1" value=1>
-                    <label for="{{q.id}}quiz-choice1">{{q.choices_1}}</label>
 
-                    <input type="radio" name="{{q.id}}quiz-choice2" value=1>
-                    <label for="{{q.id}}quiz-choice2">{{q.choices_2}}</label>
 
-                    <input type="radio" name="{{q.id}}quiz-choice3" value=1>
-                    <label for="{{q.id}}quiz-choice3">{{q.choices_3}}</label>
 
-                    <input type="radio" name="{{q.id}}quiz-choice4" value=1>
-                    <label for="{{q.id}}quiz-choice4">{{q.choices_4}}</label>
-                    <!--{% for i in for_range %}
-                        <input type="radio" name="{{q.id}}quiz-choice{{i}}" value=1>
-                        <label for="{{q.id}}quiz-choice{{i}}">{{q.choices_1}}</label>
-                    {% endfor %}-->
-                </fieldset>
+{% if quiz %}
+    <form action="{% url 'quiz:corrects' %}" method="post">
+        {% csrf_token %}
+
+        {% for q in quiz %}
+            <div class="quiz-num">
+                <h2 class="quiz-id">{{q.id}}</h2>
+                <div class="quiz-content">
+                    <h3 class="quiz-title">{{q.quiz_title}} 【{{q.quiz_category}}】</h3>
+                    <span class="quiz-text">　{{q.quiz_text}}</span>
+                    {% if q.id == 9 %}
+                        <ul>
+                            <li>A. 10cmの部分同士と2cm同士を同じ方向に貼り合わせる</li>
+                            <li>B. 2cmの部分を逆向きにくっつける</li>
+                            <li>C. 10cmの部分を貼り合わせ、捻って横の部分に接触しないよう,内側から2cm同士を張り合わせる。</li>
+                        </ul>
+                    {% endif %}
+                    <fieldset class="quiz-choice-field">
+                        <input type="radio" name="{{q.id}}quiz-choice" value="1">
+                        <label for="{{q.id}}quiz-choice1">{{q.choices_1}}</label>
+
+                        <input type="radio" name="{{q.id}}quiz-choice" value="2">
+                        <label for="{{q.id}}quiz-choice2">{{q.choices_2}}</label>
+
+                        <input type="radio" name="{{q.id}}quiz-choice" value="3">
+                        <label for="{{q.id}}quiz-choice3">{{q.choices_3}}</label>
+
+                        <input type="radio" name="{{q.id}}quiz-choice" value="4">
+                        <label for="{{q.id}}quiz-choice4">{{q.choices_4}}</label>
+                    </fieldset>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+        <input type="submit" value="quiz_answer">
+    </form>
 {% else %}
     <p>No quiz are available.</p>
 {% endif %}
+

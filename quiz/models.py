@@ -37,7 +37,7 @@ class Invitees(models.Model):
     pub_date    = models.DateTimeField('date published')
 
     def __str__(self):
-        return ("{} {} pont : {}".format(self.family_name, self.first_name, self.point))
+        return ("{} {} point : {}".format(self.family_name, self.first_name, self.point))
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
