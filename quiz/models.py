@@ -1,6 +1,5 @@
 from django.db import models
-from django.utils import timezone
-import datetime
+
 
 class Quiz(models.Model):
     quiz_title    = models.CharField(max_length=10, default="")
