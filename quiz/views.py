@@ -1,12 +1,16 @@
-from typing import Awaitable
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.utils import timezone
 
-# Create your views here.
 from django.http import HttpResponse
-from django.template import loader
+# from django.template import loader
+# from django.forms.forms import Form
+# from typing import Awaitable
 
-from .models import Quiz, Invitees
+from .models import Quiz, Invitees, Comments
+from .forms import AnswerForm
+import datetime
 
 
 def index(request):
@@ -15,29 +19,105 @@ def index(request):
     When the invitee presses the button in index page,
     it moves to the answer page.
     '''
-    try:
-        latest_question_list = Quiz.objects.order_by('-pub_date')[:10]
-        context = {
-            'latest_question_list': latest_question_list
-        }
-    except Quiz.DoesNotExist:
-        raise Http404("Quiz does not exist.")
-    return render(request, 'quiz/index.html' ,context)
+    if (request.method == 'POST'):
+        try:
+            comment = Comments()
+            comment.name     = request.POST['comment-name']
+            comment.comment  = request.POST['comment-text']
+            comment.pub_date = datetime.datetime.now()
+
+            latest_question_list = Quiz.objects.order_by('-pub_date')[:10]
+            context = {
+                'latest_question_list': latest_question_list
+            }
+            comment.save()
+            return render(request, 'quiz/index.html' ,context)
+
+        except Quiz.DoesNotExist:
+            raise Http404("Quiz does not exist.")
+
+    else:
+        try:
+            latest_question_list = Quiz.objects.order_by('-pub_date')[:10]
+            context = {
+                'latest_question_list': latest_question_list
+            }
+
+        except Quiz.DoesNotExist:
+            raise Http404("Quiz does not exist.")
+
+        return render(request, 'quiz/index.html' ,context)
 
 
 def new(request):
     '''
-    This method is 
+    This method is page that is used fore invitees to answer questions.
     '''
     try:
         quiz = Quiz.objects.order_by('pub_date')
+        form = AnswerForm()
         context = {
             'quiz': quiz,
-            'for_range': [i for i in range(1,5)]
+            'for_range': [i for i in range(1,5)],
+            'form' : form,
         }
+
     except Quiz.DoesNotExist:
         raise Http404('Quiz does not exist.')
+
     return render(request, 'quiz/new.html', context)
+
+
+def post(request):
+    '''
+    This method is used for post process.
+    '''
+    if request.method != 'POST':
+        quiz = Quiz.objects.order_by('pub_date')
+        form = AnswerForm()
+        context = {
+            'quiz': quiz,
+            'form' : form
+        }
+        return redirect(reverse('quiz:answer'), context)
+
+    try:
+        form = AnswerForm(request.POST)
+        point = 0
+        for i in range(10):
+            if int(request.POST['answer_{}'.format(i+1)]) == Quiz.objects.get(id=i+1).quiz_correct:
+                point += 1
+#    invitees = Invitees(form)
+        invitee = Invitees()
+        invitee.family_name = request.POST['family_name']
+        invitee.first_name  = request.POST['first_name']
+        invitee.email       = request.POST['email']
+        invitee.point       = point
+        invitee.answer_1    = request.POST['answer_1']
+        invitee.answer_2    = request.POST['answer_2']
+        invitee.answer_3    = request.POST['answer_3']
+        invitee.answer_4    = request.POST['answer_4']
+        invitee.answer_5    = request.POST['answer_5']
+        invitee.answer_6    = request.POST['answer_6']
+        invitee.answer_7    = request.POST['answer_7']
+        invitee.answer_8    = request.POST['answer_8']
+        invitee.answer_9    = request.POST['answer_9']
+        invitee.answer_10   = request.POST['answer_10']
+        invitee.pub_date    = datetime.datetime.now()
+        invitee.save()
+        context = {
+            'invitee': invitee
+        }
+        return redirect(reverse('quiz:corrects'))
+
+    except:
+        form = AnswerForm(request.POST)
+        quiz = Quiz.objects.all().order_by('pub_date')
+        context = {
+            'quiz': quiz,
+            'form': form
+        }
+        return render(request, 'quiz/new.html', context)
 
 
 def corrects(request):
@@ -45,72 +125,31 @@ def corrects(request):
     This method is used to show all corrects of quiz.
     '''
     try:
-        invitees = get_object_or_404(Invitees)
+        invitees = Invitees.objects.all()
+        quiz     = Quiz.objects.all()
         context = {
-            'invitees': invitees
+            'invitees': invitees,
+            'quiz': quiz
         }
+
     except Invitees.DoesNotExist:
         raise Http404('Invitees does not exist.')
 
     return render(request, 'quiz/corrects.html', context)
 
 
-def post(request, quiz_answer):
-    '''
-    This method is used for post process.
-    '''
-    try:
-        point = 0
-        for i in range(10):
-            if request.POST['answer-{}'.format(i+1)] == Quiz.objects.get(id=i+1).answer:
-                point += 1
-        input_value = Invitees({
-            'family_name': request.POST['family_name'],
-            'first_name':  request.POST['first_name'],
-            'email':       request.POST['email'],
-            'point':       point,
-            'answer_1':    request.POST['1quiz-choice'],
-            'answer_2':    request.POST['2quiz-choice'],
-            'answer_3':    request.POST['3quiz-choice'],
-            'answer_4':    request.POST['4quiz-choice'],
-            'answer_5':    request.POST['5quiz-choice'],
-            'answer_6':    request.POST['6quiz-choice'],
-            'answer_7':    request.POST['7quiz-choice'],
-            'answer_8':    request.POST['8quiz-choice'],
-            'answer_9':    request.POST['9quiz-choice'],
-            'answer_10':   request.POST['10quiz-choice']
-            })
-        input_value.save
-        invitees = get_object_or_404(Invitees)
-        context = {
-            'invitees': invitees
-        }
-        return render(request, 'quiz/corrects.html', context)
-    except:
-        return render(request, 'quiz/new.html', {
-            'family_name':   request.POST['family_name'],
-            'first_name':    request.POST['first_name'],
-            'email':         request.POST['email'],
-            '1quiz-choice':  request.POST['1quiz-choice'],
-            '2quiz-choice':  request.POST['2quiz-choice'],
-            '3quiz-choice':  request.POST['3quiz-choice'],
-            '4quiz-choice':  request.POST['4quiz-choice'],
-            '5quiz-choice':  request.POST['5quiz-choice'],
-            '6quiz-choice':  request.POST['6quiz-choice'],
-            '7quiz-choice':  request.POST['7quiz-choice'],
-            '8quiz-choice':  request.POST['8quiz-choice'],
-            '9quiz-choice':  request.POST['9quiz-choice'],
-            '10quiz-choice': request.POST['10quiz-choice']
-        })
-
-
 # Show all Invitees result.
 def results(request):
+    '''
+    This meshod show all invitees name and points,
+      and show correct rate graph about each questions.
+    '''
     try:
         invitees = get_object_or_404(Invitees)
         context = {
             'invitees': invitees
         }
+
     except Invitees.DoesNotExist:
         raise Http404('Invitees do not exist.')
 

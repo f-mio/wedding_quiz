@@ -1,1 +1,15 @@
-<a href="{% url 'quiz:new_answer' %}">to Quiz</a>
+
+<div class="index-page">
+
+    <span class="index-title">Welcome to our wedding reception.</span>
+
+    <a href="{% url 'quiz:answer' %}">to Quiz</a>
+
+    <form action="{% url 'quiz:index' %}" method="post">
+        <ul class="index-comment-form">
+            <input type="text" class="comment-name" name="comment-name" >
+            <textarea class="comment-text" name="comment-text" id="comment-text" placeholder="よろしければメッセージをご記入ください。"></textarea>
+            <input class="comment-submit" type="submit" value="submit">
+        </ul>
+    </form>
+</div>
