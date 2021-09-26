@@ -1,11 +1,41 @@
-<!--
-{% for field in form %}
-    <div>
-        【選択肢】
-        <div>
+
+{% load quiz_extras %}
+
+<!-- Input name and email area -->
+{% for field in form.visible_fields|slice:":3" %}
+    <ul class="new-name-field">
+            <li class="new-name-inputbox">
+                {{field}}
+            </li>
+    </ul>
+{% endfor %}
+
+<!-- Quiz Field -->
+<div class="new-quiz-field">
+    <!-- Quiz number -->
+    <div class="new-select-numbers">
+        {% for num in quiz_numbers %}
+            {% if forloop.counter == 1 %}
+                <p class="new-select-number selected">{{num}}</p>
+            {% else %}
+                <p class="new-select-number">{{num}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Select quiz field each quiz. -->
+    {% for field in form.visible_fields|slice:"3:"%}
+    <!--{{quiz.3.quiz_category}}-->
+        <div class="new-quiz-select-filed">
+            {% with quiz|select_quiz:forloop.counter0 as q %}
+                <span class="new-quiz-category">
+                    category : 【{{q.quiz_category}}】
+                </span><br>
+                <span class="new-quiz-text">
+                    {{q.quiz_text}}
+                </span><br>
+            {% endwith %}
             {{field}}
         </div>
-    </div>
-{% endfor %}
--->
-{{form}}
+    {% endfor %}
+</div>

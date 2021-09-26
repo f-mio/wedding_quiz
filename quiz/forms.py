@@ -35,16 +35,74 @@ choice_10 = (
 
 
 class AnswerForm(forms.Form):
-    family_name = forms.CharField(label="family_name", max_length=10)
-    first_name  = forms.CharField(label="first_name", max_length=10)
-    email       = forms.EmailField(label="email", max_length=50)
-    answer_1    = forms.ChoiceField(label="answer_1",  widget=forms.RadioSelect, choices=choice_1, required=True)
-    answer_2    = forms.ChoiceField(label="answer_2",  widget=forms.RadioSelect, choices=choice_2, required=True)
-    answer_3    = forms.ChoiceField(label="answer_3",  widget=forms.RadioSelect, choices=choice_3, required=True)
-    answer_4    = forms.ChoiceField(label="answer_4",  widget=forms.RadioSelect, choices=choice_4, required=True)
-    answer_5    = forms.ChoiceField(label="answer_5",  widget=forms.RadioSelect, choices=choice_5, required=True)
-    answer_6    = forms.ChoiceField(label="answer_6",  widget=forms.RadioSelect, choices=choice_6, required=True)
-    answer_7    = forms.ChoiceField(label="answer_7",  widget=forms.RadioSelect, choices=choice_7, required=True)
-    answer_8    = forms.ChoiceField(label="answer_8",  widget=forms.RadioSelect, choices=choice_8, required=True)
-    answer_9    = forms.ChoiceField(label="answer_9",  widget=forms.RadioSelect, choices=choice_9, required=True)
-    answer_10   = forms.ChoiceField(label="answer_10", widget=forms.RadioSelect, choices=choice_10, required=True)
+    family_name = forms.CharField(
+        label="family_name",
+        max_length=10,
+        widget=forms.TextInput(
+            attrs={'placeholder':'名字', 'class':'new-name-inputbox'}))
+    first_name  = forms.CharField(label="first_name", max_length=10,
+        widget=forms.TextInput(
+            attrs={'placeholder':'名前', 'class':'new-name-inputbox'}))
+    email       = forms.EmailField(label="email", max_length=50,
+        widget=forms.EmailInput(
+            attrs={'placeholder':'(任意) email', 'class':'new-name-inputbox'}))
+
+    answer_1    = forms.ChoiceField(
+        label="answer_1",
+        choices=choice_1,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_2    = forms.ChoiceField(
+        label="answer_2",
+        choices=choice_2,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_3    = forms.ChoiceField(
+        label="answer_3",
+        choices=choice_3,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_4    = forms.ChoiceField(
+        label="answer_4",
+        choices=choice_4,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_5    = forms.ChoiceField(
+        label="answer_5",
+        choices=choice_5,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_6    = forms.ChoiceField(
+        label="answer_6",
+        choices=choice_6,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_7    = forms.ChoiceField(
+        label="answer_7",
+        choices=choice_7,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_8    = forms.ChoiceField(
+        label="answer_8",
+        choices=choice_8,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_9    = forms.ChoiceField(
+        label="answer_9",
+        choices=choice_9,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
+
+    answer_10   = forms.ChoiceField(
+        label="answer_10",
+        choices=choice_10,
+        required=True,
+        widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))

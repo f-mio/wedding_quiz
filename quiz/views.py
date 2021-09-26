@@ -4,9 +4,6 @@ from django.urls import reverse
 from django.utils import timezone
 
 from django.http import HttpResponse
-# from django.template import loader
-# from django.forms.forms import Form
-# from typing import Awaitable
 
 from .models import Quiz, Invitees, Comments
 from .forms import AnswerForm
@@ -33,8 +30,8 @@ def index(request):
             comment.save()
             return render(request, 'quiz/index.html' ,context)
 
-        except Quiz.DoesNotExist:
-            raise Http404("Quiz does not exist.")
+        except:
+            raise Http404("Quiz does not exist, or comment can not posted.")
 
     else:
         try:
@@ -58,7 +55,7 @@ def new(request):
         form = AnswerForm()
         context = {
             'quiz': quiz,
-            'for_range': [i for i in range(1,5)],
+            'quiz_numbers': [i for i in range(1,11)],
             'form' : form,
         }
 
@@ -73,10 +70,11 @@ def post(request):
     This method is used for post process.
     '''
     if request.method != 'POST':
-        quiz = Quiz.objects.order_by('pub_date')
+        quiz = Quiz.objects.order_by('pub_date').filter
         form = AnswerForm()
         context = {
             'quiz': quiz,
+            'quiz_numbers': [i for i in range(1,11)],
             'form' : form
         }
         return redirect(reverse('quiz:answer'), context)
