@@ -103,10 +103,11 @@ def post(request):
         invitee.answer_10   = request.POST['answer_10']
         invitee.pub_date    = datetime.datetime.now()
         invitee.save()
-        context = {
+        invitee_info = {
             'invitee': invitee
         }
-        return redirect(reverse('quiz:corrects'))
+#        return redirect(reverse('quiz:corrects'), invitee_info)
+        return render(request, 'quiz/corrects.html', invitee_info)
 
     except:
         form = AnswerForm(request.POST)
@@ -118,15 +119,16 @@ def post(request):
         return render(request, 'quiz/new.html', context)
 
 
-def corrects(request):
+def corrects(request, invitee_info):
     '''
     This method is used to show all corrects of quiz.
     '''
+#   直接correctsをリンクもしくは、inviteeが保存されていない場合、リダイレクト処理
     try:
-        invitees = Invitees.objects.all()
+#        invitees = Invitees.objects.all()
         quiz     = Quiz.objects.all()
         context = {
-            'invitees': invitees,
+            'invitees': invitee_info,
             'quiz': quiz
         }
 

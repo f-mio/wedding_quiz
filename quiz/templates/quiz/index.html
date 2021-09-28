@@ -1,15 +1,24 @@
 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/reset.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/index.scss' %}">
+
+
 <div class="index-page">
 
-    <span class="index-title">Welcome to our wedding reception.</span>
+    <div class="welcome-message">
+        <span class="message">Welcome to our<br>wedding reception.</span>
+    </div>
 
-    <a href="{% url 'quiz:answer' %}">to Quiz</a>
+    <div class="link-new-div">
+        <a href="{% url 'quiz:answer' %}" class="link-new" >Quiz start</a>
+    </div>
 
-    <form action="{% url 'quiz:index' %}" method="post">
+    <form class="index-form" action="{% url 'quiz:index' %}" method="post">
         <ul class="index-comment-form">
-            <input type="text" class="comment-name" name="comment-name" >
+            <input type="text" class="comment-name" name="comment-name" placeholder="お名前 (メッセージいただける場合)">
             <textarea class="comment-text" name="comment-text" id="comment-text" placeholder="よろしければメッセージをご記入ください。"></textarea>
-            <input class="comment-submit" type="submit" value="submit">
+            <input class="comment-submit" type="submit" value="メッセージ送信">
         </ul>
     </form>
 </div>
