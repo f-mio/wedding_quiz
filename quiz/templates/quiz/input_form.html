@@ -2,13 +2,15 @@
 {% load quiz_extras %}
 
 <!-- Input name and email area -->
-{% for field in form.visible_fields|slice:":3" %}
+<div class="new-name-input-field">
     <ul class="new-name-field">
-            <li class="new-name-inputbox">
-                {{field}}
-            </li>
+        {% for field in form.visible_fields|slice:":3" %}
+                <li class="new-name-inputbox">
+                    {{field}}
+                </li>
+        {% endfor %}
     </ul>
-{% endfor %}
+</div>
 
 <!-- Quiz Field -->
 <div class="new-quiz-field">
@@ -26,16 +28,30 @@
     <!-- Select quiz field each quiz. -->
     {% for field in form.visible_fields|slice:"3:"%}
     <!--{{quiz.3.quiz_category}}-->
-        <div class="new-quiz-select-filed">
-            {% with quiz|select_quiz:forloop.counter0 as q %}
-                <span class="new-quiz-category">
-                    category : 【{{q.quiz_category}}】
-                </span><br>
-                <span class="new-quiz-text">
-                    {{q.quiz_text}}
-                </span><br>
-            {% endwith %}
-            {{field}}
-        </div>
+        {% if forloop.counter == 1 %}
+            <div class="new-quiz-select-field selected">
+                {% with quiz|select_quiz:forloop.counter0 as q %}
+                    <p class="new-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="new-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br>
+                {% endwith %}
+                {{field}}
+            </div>
+        {% else %}
+            <div class="new-quiz-select-field none-selected">
+                {% with quiz|select_quiz:forloop.counter0 as q %}
+                    <p class="new-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="new-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br>
+                {% endwith %}
+                {{field}}
+            </div>
+        {% endif %}
     {% endfor %}
 </div>

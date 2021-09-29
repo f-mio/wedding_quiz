@@ -43,7 +43,7 @@ class AnswerForm(forms.Form):
     first_name  = forms.CharField(label="first_name", max_length=10,
         widget=forms.TextInput(
             attrs={'placeholder':'名前', 'class':'new-name-inputbox'}))
-    email       = forms.EmailField(label="email", max_length=50,
+    email       = forms.EmailField(label="email", max_length=50, required=False,
         widget=forms.EmailInput(
             attrs={'placeholder':'(任意) email', 'class':'new-name-inputbox'}))
 

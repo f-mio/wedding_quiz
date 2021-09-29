@@ -1,21 +1,31 @@
 
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/new.scss' %}">
+</head>
 
-{% if quiz %}
-    <form action="{% url 'quiz:post' %}" method="post">
-        {% csrf_token %}
+<body>
+    <div class="new-page">
+        {% if quiz %}
+            <form action="{% url 'quiz:post' %}" method="post">
+                {% csrf_token %}
 
-        {% if form.subject.errors %}
-            <ol>
-                {% for error in form.subject.errors %}
-                    <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-            </ol>
+                {% if form.subject.errors %}
+                    <ol>
+                        {% for error in form.subject.errors %}
+                            <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+
+                {% include "quiz/input_form.html" %}
+                <div class="submit-field">
+                    <input type="submit" value="送信" class="quiz-submit-btn">
+                </div>
+            </form>
+        {% else %}
+            <p>No quiz are available.</p>
         {% endif %}
-
-        {% include "quiz/input_form.html" %}
-        <input type="submit" value="submit">
-    </form>
-{% else %}
-    <p>No quiz are available.</p>
-{% endif %}
-
+    </div>
+</body>
