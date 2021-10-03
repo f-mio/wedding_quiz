@@ -1,11 +1,19 @@
 
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'quiz/reset.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'quiz/index.scss' %}">
+
+{% extends "quiz/base.html" %}
+
+{% block load_file %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/index.css' %}">
+{% endblock %}
 
 
+{% block title %}
+    Top -Wedding Quiz App-
+{% endblock %}
+
+{% block content %}
 <div class="index-page">
-
     <div class="welcome-message">
         <span class="message">Welcome to our<br>wedding reception.</span>
     </div>
@@ -16,9 +24,10 @@
 
     <form class="index-form" action="{% url 'quiz:index' %}" method="post">
         <ul class="index-comment-form">
-            <input type="text" class="comment-name" name="comment-name" placeholder="お名前 (メッセージいただける場合)">
+            <input type="text" class="comment-name" name="comment-name" placeholder="お名前">
             <textarea class="comment-text" name="comment-text" id="comment-text" placeholder="よろしければメッセージをご記入ください。"></textarea>
             <input class="comment-submit" type="submit" value="メッセージ送信">
         </ul>
     </form>
 </div>
+{% endblock %}

@@ -1,31 +1,37 @@
 
-<head>
+{% extends "quiz/base.html" %}
+
+{% block load_file %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'quiz/reset.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'quiz/new.scss' %}">
-</head>
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/new.css' %}">
+{% endblock %}
 
-<body>
-    <div class="new-page">
-        {% if quiz %}
-            <form action="{% url 'quiz:post' %}" method="post">
-                {% csrf_token %}
 
-                {% if form.subject.errors %}
-                    <ol>
-                        {% for error in form.subject.errors %}
-                            <li><strong>{{ error|escape }}</strong></li>
-                        {% endfor %}
-                    </ol>
-                {% endif %}
+{% block title %}
+    投稿 -Wedding Quiz App-
+{% endblock %}
 
-                {% include "quiz/input_form.html" %}
-                <div class="submit-field">
-                    <input type="submit" value="送信" class="quiz-submit-btn">
-                </div>
-            </form>
-        {% else %}
-            <p>No quiz are available.</p>
-        {% endif %}
-    </div>
-</body>
+{% block content %}
+<div class="new-page">
+    {% if quiz %}
+        <form action="{% url 'quiz:post' %}" method="post">
+            {% csrf_token %}
+
+            {% if form.subject.errors %}
+                <ol>
+                    {% for error in form.subject.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+
+            {% include "quiz/input_form.html" %}
+            <div class="submit-field">
+                <input type="submit" value="送信" class="quiz-submit-btn">
+            </div>
+        </form>
+    {% else %}
+        <p>No quiz are available.</p>
+    {% endif %}
+</div>
+{% endblock %}

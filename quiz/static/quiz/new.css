@@ -10,6 +10,9 @@ div.new-page{
     align-items: center;
 }
 
+
+/* Input field. first and family name, email. */
+
 div.new-name-input-field{
     display: flex;
     flex-direction: column;
@@ -25,6 +28,9 @@ div.new-name-input-field ul.new-name-field{
 div.new-name-input-field ul.new-name-field li.new-name-inputbox{
     list-style-type: none;
 }
+
+
+/* Quiz Field */
 
 div.new-quiz-field{
     width: 95vw;
@@ -47,8 +53,17 @@ div.new-quiz-field div.new-select-numbers p.new-select-number{
     text-align: center;
 }
 
+div.new-quiz-field div.new-select-numbers p.new-select-number:hover{
+    background-color: rgba(100, 0, 255, 0.8);
+}
+
 div.new-quiz-field div.new-select-numbers p.selected{
     background-color: rgba(65, 100, 225, 0.8);
+}
+
+/* If checked question, then selector is granted by javascript. */
+div.new-quiz-field div.new-select-numbers p.answered{
+    background-color: rgba(255, 165, 0, 0.8);
 }
 
 div.new-quiz-field div.new-quiz-select-field{
@@ -64,7 +79,7 @@ div.none-selected{
     display: none;
 }
 
-/* Quiz Field */
+/* Quiz text and category field. */
 div.new-quiz-field div.new-quiz-select-field p.new-quiz-category{
     color: rgb(20, 255, 120);
     font-size: 20px;
@@ -77,6 +92,8 @@ div.new-quiz-field div.new-quiz-select-field span.new-quiz-text{
     color: beige;
 }
 
+
+/* Select quiz field. */
 div.new-quiz-field div.new-quiz-select-field ul.new-radio-select{
     padding-left: 10px;
 }
