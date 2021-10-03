@@ -1,6 +1,7 @@
 
 
 div.new-page{
+    width: 100vw;
     background: white url("index_background_image.jpg") no-repeat;
     background-size: cover;
     background-repeat: no-repeat;
@@ -8,11 +9,11 @@ div.new-page{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
 }
 
 
 /* Input field. first and family name, email. */
-
 div.new-name-input-field{
     display: flex;
     flex-direction: column;
@@ -21,17 +22,20 @@ div.new-name-input-field{
 }
 
 div.new-name-input-field ul.new-name-field{
-    background-color: pink;
     padding-left: 0px;
 }
 
-div.new-name-input-field ul.new-name-field li.new-name-inputbox{
+div.new-name-input-field ul.new-name-field li.new-name-input-box{
     list-style-type: none;
 }
 
+.new-name-inputbox{
+    width: 80vw;
+    height: 50px;
+    margin: 5px 0;
+}
 
 /* Quiz Field */
-
 div.new-quiz-field{
     width: 95vw;
     display: flex;
@@ -44,8 +48,21 @@ div.new-quiz-field div.new-select-numbers{
     justify-content: space-between;
 }
 
-div.new-quiz-field div.new-select-numbers p.new-select-number{
+/*div.new-quiz-field div.new-select-numbers p.new-select-number{}*/
+
+div.new-quiz-field div.new-select-numbers p.num-selected{
     width: 10%;
+    font-size: 35px;
+    background-color: rgba(65, 100, 225, 0.8);
+    border: 1px black solid;
+    border-style: solid solid none solid;
+    border-radius: 6px 8px 0 0;
+    text-align: center;
+}
+
+div.new-quiz-field div.new-select-numbers p.num-none-selected{
+    width: 10%;
+    font-size: 35px;
     background-color: rgba(200, 0, 255, 0.5);
     border: 1px black solid;
     border-style: solid solid none solid;
@@ -53,21 +70,14 @@ div.new-quiz-field div.new-select-numbers p.new-select-number{
     text-align: center;
 }
 
-div.new-quiz-field div.new-select-numbers p.new-select-number:hover{
-    background-color: rgba(100, 0, 255, 0.8);
-}
-
-div.new-quiz-field div.new-select-numbers p.selected{
-    background-color: rgba(65, 100, 225, 0.8);
-}
-
 /* If checked question, then selector is granted by javascript. */
 div.new-quiz-field div.new-select-numbers p.answered{
     background-color: rgba(255, 165, 0, 0.8);
 }
 
-div.new-quiz-field div.new-quiz-select-field{
+div.new-quiz-field div.quiz-selected{
     width: 95vw;
+    font-size: 40px;
     background-color: rgba(65, 100, 225, 0.8);
     border: 1px black solid;
     border-style: none solid solid solid;
@@ -75,36 +85,40 @@ div.new-quiz-field div.new-quiz-select-field{
     padding: 10px;
 }
 
-div.none-selected{
-    display: none;
+div.quiz-none-selected{
+    opacity: 0;
+    height: 0px;
 }
 
 /* Quiz text and category field. */
-div.new-quiz-field div.new-quiz-select-field p.new-quiz-category{
+div.new-quiz-field div.quiz-selected p.new-quiz-category{
     color: rgb(20, 255, 120);
-    font-size: 20px;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-div.new-quiz-field div.new-quiz-select-field span.new-quiz-text{
+div.new-quiz-field div.quiz-selected span.new-quiz-text{
     color: beige;
 }
 
 
 /* Select quiz field. */
-div.new-quiz-field div.new-quiz-select-field ul.new-radio-select{
+div.new-quiz-field div.quiz-selected ul.new-radio-select{
     padding-left: 10px;
 }
 
-div.new-quiz-field div.new-quiz-select-field ul.new-radio-select li{
+div.new-quiz-field div.quiz-selected ul.new-radio-select li{
     list-style-type: none;
     color: beige;
 }
 
 
 /* Submit Button */
+div.new-page div.hidden{
+    display: none;
+}
+
 div.new-page div.submit-field{
     display: flex;
     flex-direction: row;

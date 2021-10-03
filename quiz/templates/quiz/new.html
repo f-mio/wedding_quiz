@@ -1,8 +1,9 @@
 
 {% extends "quiz/base.html" %}
 
+{% load static %}
+
 {% block load_file %}
-    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'quiz/new.css' %}">
 {% endblock %}
 
@@ -12,6 +13,8 @@
 {% endblock %}
 
 {% block content %}
+<!-- JSの読み込み -->
+<script type="text/javascript" src="{% static 'quiz/new.js' %}"></script>
 <div class="new-page">
     {% if quiz %}
         <form action="{% url 'quiz:post' %}" method="post">
@@ -26,7 +29,7 @@
             {% endif %}
 
             {% include "quiz/input_form.html" %}
-            <div class="submit-field">
+            <div class="hidden">
                 <input type="submit" value="送信" class="quiz-submit-btn">
             </div>
         </form>

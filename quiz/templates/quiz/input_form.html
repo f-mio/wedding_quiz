@@ -5,7 +5,7 @@
 <div class="new-name-input-field">
     <ul class="new-name-field">
         {% for field in form.visible_fields|slice:":3" %}
-                <li class="new-name-inputbox">
+                <li class="new-name-input-box">
                     {{field}}
                 </li>
         {% endfor %}
@@ -18,18 +18,17 @@
     <div class="new-select-numbers">
         {% for num in quiz_numbers %}
             {% if forloop.counter == 1 %}
-                <p class="new-select-number selected" id="quiz-{{ forloop.counter }}">{{num}}</p>
+                <p class="new-select-number num-selected" id="quiz-{{ forloop.counter }}">{{num}}</p>
             {% else %}
-                <p class="new-select-number">{{num}}</p>
+                <p class="new-select-number num-none-selected" id="quiz-{{ forloop.counter }}">{{num}}</p>
             {% endif %}
         {% endfor %}
     </div>
 
     <!-- Select quiz field each quiz. -->
     {% for field in form.visible_fields|slice:"3:"%}
-    <!--{{quiz.3.quiz_category}}-->
         {% if forloop.counter == 1 %}
-            <div class="new-quiz-select-field selected" id="quiz-{{ forloop.counter }}-main">
+            <div class="quiz-selected" id="quiz-{{ forloop.counter }}-main">
                 {% with quiz|select_quiz:forloop.counter0 as q %}
                     <p class="new-quiz-category">
                         category : {{q.quiz_category}}
@@ -41,7 +40,7 @@
                 {{field}}
             </div>
         {% else %}
-            <div class="new-quiz-select-field none-selected" id="quiz-{{ forloop.counter }}-main">
+            <div class="quiz-none-selected" id="quiz-{{ forloop.counter }}-main">
                 {% with quiz|select_quiz:forloop.counter0 as q %}
                     <p class="new-quiz-category">
                         category : {{q.quiz_category}}
