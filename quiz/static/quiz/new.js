@@ -17,49 +17,59 @@
 ＜全回答の場合、提出ボタンを表示＞
 　1. answered属性の個数をカウント
 　2. answered属性が10個になるとhidden属性を削除し、submit-field属性へ変更する。
-
 */
 
 
-// //////////////////////////////
-// タブの切替によるquiz表示の変更
+
 document.addEventListener('DOMContentLoaded', function(){
 
+    // // //////////////////////////////
+    // // タブの切替によるquiz表示の変更
     const QuizNumList = document.querySelectorAll('.new-select-number');
-    console.log(QuizNumList);
     QuizNumList.forEach( (all_num) => {
         all_num.addEventListener('mousedown', (event) =>{
             const selectNumber   = event.target.innerText;
-            const currentNumbers = document.querySelectorAll('.num-selected');
+            const previousNumbers = document.querySelectorAll('.num-selected');
 
             // 既存のnum-selected属性とquiz-selected属性を全て削除。
-            currentNumbers.forEach((current) => {
-                let currentP   = document.getElementById(`quiz-${current.innerText}`);
-                let currentDiv = document.getElementById(`quiz-${current.innerText}-main`);
-                currentP.removeAttribute('class', 'num-selected')
-                currentP.setAttribute('class', 'num-none-selected')
-                currentDiv.removeAttribute('class', 'quiz-selected')
-                currentDiv.setAttribute('class', 'quiz-none-selected')
+            previousNumbers.forEach((previous_num) => {
+                let previousQuizNum   = document.getElementById(`quiz-${previous_num.innerText}`);
+                let previousQuizField = document.getElementById(`quiz-${previous_num.innerText}-main`);
+                previousQuizNum.removeAttribute('class', 'num-selected');
+                previousQuizNum.setAttribute('class', 'num-none-selected');
+                previousQuizField.removeAttribute('class', 'quiz-selected');
+                previousQuizField.setAttribute('class', 'quiz-none-selected');
             });
 
             // 新しく選択したものにnum-selected属性とquiz-selected属性を追加する。
-            let selectP   = document.getElementById(`quiz-${selectNumber}`);
-            let selectDiv = document.getElementById(`quiz-${selectNumber}-main`)
-            selectP.removeAttribute('clas', 'num-none-selected')
-            selectP.setAttribute('class', 'num-selected')
-            selectDiv.removeAttribute('class', 'quiz-none-selected')
-            selectDiv.setAttribute('class', 'quiz-selected')
+            let selectQuizNum   = document.getElementById(`quiz-${selectNumber}`);
+            let selectQuizField = document.getElementById(`quiz-${selectNumber}-main`);
+            selectQuizNum.removeAttribute('class', 'num-none-selected');
+            selectQuizNum.setAttribute('class', 'num-selected');
+            selectQuizField.removeAttribute('class', 'quiz-none-selected');
+            selectQuizField.setAttribute('class', 'quiz-selected');
+
         });
     });
+    // //////////////////////////////
+    // タブへの回答済み表示
+    const choices = document.querySelectorAll('.new-radio-select li');
+    choices.forEach( (radioBtn) => {
+        radioBtn.addEventListener('change', (e_radio) => {
+            // spanにanswered属性を追加
+            const quizNum = e_radio.target.id.slice(10,-2);
+            const quizNum_span = document.getElementById(`quiz-${quizNum}-num`);
+            quizNum_span.removeAttribute('class', 'unanswered')
+            quizNum_span.setAttribute('class', 'answered')
 
-})
-
-
-// //////////////////////////////
-// タブへの回答済み表示
-
-
-
-
-// //////////////////////////////
-// 全回答した場合に提出ボタンを表示
+            // //////////////////////////////
+            // answeredの数が10の場合、送信ボタンを表示
+            const answered = document.querySelectorAll('.answered')
+            if (answered.length === 10) {
+                const submitBtn = document.getElementById('submit-field');
+                submitBtn.removeAttribute('class', 'hidden');
+                submitBtn.setAttribute('class', 'submit-field')
+            };
+        });
+    });
+});

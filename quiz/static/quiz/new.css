@@ -48,6 +48,12 @@ div.new-quiz-field div.new-select-numbers{
     justify-content: space-between;
 }
 
+/* If checked question, then selector is granted by javascript. */
+div.new-quiz-field div.new-select-numbers span.answered{
+    color: red;
+    font-weight: 900;
+}
+
 /*div.new-quiz-field div.new-select-numbers p.new-select-number{}*/
 
 div.new-quiz-field div.new-select-numbers p.num-selected{
@@ -68,11 +74,6 @@ div.new-quiz-field div.new-select-numbers p.num-none-selected{
     border-style: solid solid none solid;
     border-radius: 6px 8px 0 0;
     text-align: center;
-}
-
-/* If checked question, then selector is granted by javascript. */
-div.new-quiz-field div.new-select-numbers p.answered{
-    background-color: rgba(255, 165, 0, 0.8);
 }
 
 div.new-quiz-field div.quiz-selected{
