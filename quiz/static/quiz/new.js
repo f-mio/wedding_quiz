@@ -40,10 +40,8 @@ document.addEventListener('DOMContentLoaded', function(){
                 previousQuizField.removeAttribute('class', 'quiz-selected');
                 previousQuizField.setAttribute('class', 'quiz-none-selected');
                 let choiceBtns = document.getElementsByName(`answer_${previous_num.innerText}`)
-                console.log(`answer-${previous_num.innerText}`)
-                console.log(choiceBtns)
                 choiceBtns.forEach( (Btn) => {
-                    console.log(Btn)
+                    Btn.disabled = true
                 });
             });
 
@@ -55,8 +53,6 @@ document.addEventListener('DOMContentLoaded', function(){
             selectQuizField.removeAttribute('class', 'quiz-none-selected');
             selectQuizField.setAttribute('class', 'quiz-selected');
             let choiceBtns = document.getElementsByName(`answer_${selectNumber}`)
-            console.log(`answer_${selectNumber}`)
-            console.log(choiceBtns)
             choiceBtns.forEach( (Btn) => {
                 Btn.disabled = false
             });
