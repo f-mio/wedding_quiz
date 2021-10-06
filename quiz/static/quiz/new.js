@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 console.log(`answer-${previous_num.innerText}`)
                 console.log(choiceBtns)
                 choiceBtns.forEach( (Btn) => {
-                    Btn.disabled = true
                     console.log(Btn)
                 });
             });
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log(`answer_${selectNumber}`)
             console.log(choiceBtns)
             choiceBtns.forEach( (Btn) => {
-                console.log(Btn)
                 Btn.disabled = false
             });
         });
