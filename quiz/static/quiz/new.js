@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function(){
                 previousQuizNum.setAttribute('class', 'num-none-selected');
                 previousQuizField.removeAttribute('class', 'quiz-selected');
                 previousQuizField.setAttribute('class', 'quiz-none-selected');
+                let choiceBtns = document.getElementsByName(`answer_${previous_num.innerText}`)
+                console.log(`answer-${previous_num.innerText}`)
+                console.log(choiceBtns)
+                choiceBtns.forEach( (Btn) => {
+                    Btn.disabled = true
+                    console.log(Btn)
+                });
             });
 
             // 新しく選択したものにnum-selected属性とquiz-selected属性を追加する。
@@ -48,9 +55,16 @@ document.addEventListener('DOMContentLoaded', function(){
             selectQuizNum.setAttribute('class', 'num-selected');
             selectQuizField.removeAttribute('class', 'quiz-none-selected');
             selectQuizField.setAttribute('class', 'quiz-selected');
-
+            let choiceBtns = document.getElementsByName(`answer_${selectNumber}`)
+            console.log(`answer_${selectNumber}`)
+            console.log(choiceBtns)
+            choiceBtns.forEach( (Btn) => {
+                console.log(Btn)
+                Btn.disabled = false
+            });
         });
     });
+
     // //////////////////////////////
     // タブへの回答済み表示
     const choices = document.querySelectorAll('.new-radio-select li');

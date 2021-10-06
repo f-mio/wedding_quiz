@@ -51,58 +51,68 @@ class AnswerForm(forms.Form):
         label="answer_1",
         choices=choice_1,
         required=True,
+        disabled=False,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_2    = forms.ChoiceField(
         label="answer_2",
         choices=choice_2,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_3    = forms.ChoiceField(
         label="answer_3",
         choices=choice_3,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_4    = forms.ChoiceField(
         label="answer_4",
         choices=choice_4,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_5    = forms.ChoiceField(
         label="answer_5",
         choices=choice_5,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_6    = forms.ChoiceField(
         label="answer_6",
         choices=choice_6,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_7    = forms.ChoiceField(
         label="answer_7",
         choices=choice_7,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_8    = forms.ChoiceField(
         label="answer_8",
         choices=choice_8,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_9    = forms.ChoiceField(
         label="answer_9",
         choices=choice_9,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))
 
     answer_10   = forms.ChoiceField(
         label="answer_10",
         choices=choice_10,
         required=True,
+        disabled=True,
         widget=forms.RadioSelect(attrs={'class':'new-radio-select'}))

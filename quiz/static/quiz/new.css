@@ -89,6 +89,19 @@ div.new-quiz-field div.quiz-selected{
 div.quiz-none-selected{
     opacity: 0;
     height: 0px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style-type: none;
+}
+div.quiz-none-selected p{
+    font-size: 0;
+}
+div.quiz-none-selected span{
+    font-size: 0;
+}
+div.quiz-none-selected li{
+    font-size: 0;
 }
 
 /* Quiz text and category field. */
@@ -127,13 +140,14 @@ div.new-page div.submit-field{
 }
 
 div.new-page div.submit-field input.quiz-submit-btn{
-    width: 200px;
-    height: 34px;
+    font-size: 50px;
+    width: 400px;
+    height: 100px;
     background-color: burlywood;
     border: 3px beige ridge;
     border-radius: 15px;
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 div.new-page div.submit-field input.quiz-submit-btn:hover{
