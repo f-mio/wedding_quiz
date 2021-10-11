@@ -66,7 +66,7 @@ div.new-quiz-field div.new-select-numbers p.num-selected{
     text-align: center;
 }
 
-div.new-quiz-field div.new-select-numbers p.num-none-selected{
+div.new-quiz-field div.new-select-numbers p.num-not-selected{
     width: 10%;
     font-size: 35px;
     background-color: rgba(200, 0, 255, 0.5);
@@ -86,7 +86,7 @@ div.new-quiz-field div.quiz-selected{
     padding: 10px;
 }
 
-div.quiz-none-selected{
+div.quiz-not-selected{
     opacity: 0;
     height: 0px;
     display: flex;
@@ -94,13 +94,13 @@ div.quiz-none-selected{
     text-decoration: none;
     list-style-type: none;
 }
-div.quiz-none-selected p{
+div.quiz-not-selected p{
     font-size: 0;
 }
-div.quiz-none-selected span{
+div.quiz-not-selected span{
     font-size: 0;
 }
-div.quiz-none-selected li{
+div.quiz-not-selected li{
     font-size: 0;
 }
 
@@ -114,6 +114,11 @@ div.new-quiz-field div.quiz-selected p.new-quiz-category{
 
 div.new-quiz-field div.quiz-selected span.new-quiz-text{
     color: beige;
+}
+
+img.q10-picture{
+    width: 80%;
+    margin-left: 10%;
 }
 
 

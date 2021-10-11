@@ -6,6 +6,8 @@ class Quiz(models.Model):
     quiz_category = models.CharField(max_length=10, default="")
     quiz_text     = models.TextField(max_length=400, default="")
     quiz_correct  = models.IntegerField(default=0)
+    correct_text  = models.CharField(max_length=100, default="")
+    explanation   = models.TextField(max_length=600, default="")
     choice_1      = models.CharField(max_length=100, default="")
     choice_2      = models.CharField(max_length=100, default="")
     choice_3      = models.CharField(max_length=100, default="")

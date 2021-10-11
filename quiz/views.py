@@ -107,7 +107,7 @@ def post(request):
             'invitee': invitee
         }
 #        return redirect(reverse('quiz:corrects'), invitee_info)
-        return render(request, 'quiz/corrects.html', invitee_info)
+        return render(request, 'quiz/corrects_invitee.html', invitee_info)
 
     except:
         form = AnswerForm(request.POST)
@@ -119,21 +119,15 @@ def post(request):
         return render(request, 'quiz/new.html', context)
 
 
-def corrects(request, invitee_info):
+def corrects(request):
     '''
     This method is used to show all corrects of quiz.
     '''
-#   直接correctsをリンクもしくは、inviteeが保存されていない場合、リダイレクト処理
-    try:
-#        invitees = Invitees.objects.all()
-        quiz     = Quiz.objects.all()
-        context = {
-            'invitees': invitee_info,
-            'quiz': quiz
-        }
-
-    except Invitees.DoesNotExist:
-        raise Http404('Invitees does not exist.')
+    quiz     = Quiz.objects.all()
+    context = {
+        'quiz': quiz,
+        'quiz_numbers': [i for i in range(1,11)]
+    }
 
     return render(request, 'quiz/corrects.html', context)
 

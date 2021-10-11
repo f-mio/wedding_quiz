@@ -1,0 +1,131 @@
+
+div.corrects-page{
+    width: 100vw;
+    background: white url("index_background_image.jpg") no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+div.corrects-quiz-field{
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p.title {
+    padding: 30px 0;
+}
+
+p.title span.title-box{
+    font-size: 50px;
+    color: beige;
+    background-color: rgba(65, 100, 225, 0.4);
+    text-shadow: rgb(120, 120, 120) 3px 4px;
+    text-align: center;
+    border: solid 2px blue;
+    padding: 3px 15px;
+}
+
+/* Selectable numbers */
+div.corrects-quiz-field div.select-numbers{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.corrects-quiz-field div.select-numbers p.num-selected{
+    width: 10%;
+    font-size: 35px;
+    background-color: rgba(65, 100, 225, 0.8);
+    border: 1px black solid;
+    border-style: solid solid none solid;
+    border-radius: 6px 8px 0 0;
+    text-align: center;
+}
+
+div.corrects-quiz-field div.select-numbers p.num-not-selected{
+    width: 10%;
+    font-size: 35px;
+    background-color: rgba(200, 0, 255, 0.5);
+    border: 1px black solid;
+    border-style: solid solid none solid;
+    border-radius: 6px 8px 0 0;
+    text-align: center;
+}
+
+
+div.corrects-quiz-field div.quiz-selected{
+    width: 95vw;
+    background-color: rgba(65, 100, 225, 0.8);
+    border: 1px black solid;
+    border-style: none solid solid solid;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+}
+
+p.corrects-quiz-category{
+    color: rgb(20, 255, 120);
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+span.corrects-quiz-correct{
+    color: red;
+}
+
+h3.explanation-title{
+    color: whitesmoke;
+    font-size: 20px;
+    text-shadow: gray 3px 2px;
+}
+
+span.corrects-quiz-text{
+    color: beige;
+    font-size: 30px;
+}
+
+span.corrects-quiz-correct{
+    color: red;
+    font-size: 30px;
+}
+
+span.corrects-quiz-explanation{
+    color: whitesmoke;
+    font-size: 15px;
+}
+
+
+/* If num is not selected, then quiz is apply following css. */
+div.quiz-not-selected{
+    opacity: 0;
+    height: 0px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+div.quiz-not-selected p{
+    font-size: 0;
+}
+div.quiz-not-selected span{
+    font-size: 0;
+}
+
+div.embedding-field{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+div.embed-field iframe.embed-movie{
+}
