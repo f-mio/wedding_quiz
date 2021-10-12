@@ -1,0 +1,60 @@
+
+{% load static %}
+{% load quiz_extras %}
+
+<!-- Input name and email area -->
+<div class="new-name-input-field">
+    <ul class="new-name-field">
+        {% for field in form.visible_fields|slice:":3" %}
+                <li class="new-name-input-box">
+                    {{field}}
+                </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Quiz Field -->
+<div class="new-quiz-field">
+    <!-- Quiz number -->
+    <div class="new-select-numbers">
+        {% for num in quiz_numbers %}
+            {% if forloop.counter == 1 %}
+                <p class="new-select-number num-selected" id="quiz-{{ forloop.counter }}"><span class="unanswered" id="quiz-{{ forloop.counter }}-num">{{num}}</span></p>
+            {% else %}
+                <p class="new-select-number num-not-selected" id="quiz-{{ forloop.counter }}"><span class="unanswered" id="quiz-{{ forloop.counter }}-num">{{num}}</span></p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Select quiz field each quiz. -->
+    {% for field in form.visible_fields|slice:"3:"%}
+        {% if forloop.counter == 1 %}
+            <div class="quiz-selected" id="quiz-{{ forloop.counter }}-main">
+                {% with quiz|select_quiz:forloop.counter0 as q %}
+                    <p class="new-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="new-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br>
+                {% endwith %}
+                {{field}}
+            </div>
+        {% else %}
+            <div class="quiz-not-selected" id="quiz-{{ forloop.counter }}-main">
+                {% with quiz|select_quiz:forloop.counter0 as q %}
+                    <p class="new-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="new-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br>
+                    {% if forloop.counter == 10 %}
+                        <img class="q10-picture" src="{% static 'quiz/q10.png' %}" alt="If you don't see picture, please reload now.">
+                    {% endif %}
+            {% endwith %}
+                {{field}}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

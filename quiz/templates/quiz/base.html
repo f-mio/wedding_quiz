@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'quiz/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/reset.css' %}">
+    {% block load_file %}
+    {% endblock %}
+    <meta charset=UTF-8>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

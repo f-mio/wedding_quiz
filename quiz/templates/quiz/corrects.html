@@ -1,0 +1,89 @@
+
+{% extends "quiz/base.html" %}
+
+{% load static %}
+
+{% block load_file %}
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/corrects.css' %}">
+{% endblock %}
+
+
+{% block title %}
+    正解 -Wedding Quiz App-
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript" src="{% static 'quiz/corrects.js' %}"></script>
+<!-- Quiz Field -->
+<div class="corrects-page">
+    <p class="title">
+        <span class="title-box">正解ページ</span>
+    </p>
+
+    <div class="corrects-quiz-field">
+        <!-- Quiz number -->
+        <div class="select-numbers">
+            {% for num in quiz_numbers %}
+                {% if forloop.counter == 1 %}
+                    <p class="select-number num-selected" id="quiz-{{ forloop.counter }}">{{num}}</p>
+                {% else %}
+                    <p class="select-number num-not-selected" id="quiz-{{ forloop.counter }}">{{num}}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Select quiz field each quiz. -->
+        {% for q in quiz %}
+            {% if forloop.counter == 1 %}
+                <div class="quiz-selected" id="quiz-{{ forloop.counter }}-main">
+                    <p class="corrects-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="corrects-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br><br>
+                    <span class="corrects-quiz-correct">
+                        　{{q.correct_text}}
+                    </span><br><br>
+                    <h3 class="explanation-title">＜解説＞</h3>
+                    <span class="corrects-quiz-explanation">
+                        　{{q.explanation|linebreaksbr}}
+                    </span><br>
+                </div>
+            {% else %}
+                <div class="quiz-not-selected" id="quiz-{{ forloop.counter }}-main">
+                    <p class="corrects-quiz-category">
+                        category : {{q.quiz_category}}
+                    </p>
+                    <span class="corrects-quiz-text">
+                        　{{q.quiz_text|linebreaksbr}}
+                    </span><br><br>
+                    <span class="corrects-quiz-correct">
+                        　{{q.correct_text}}
+                    </span><br><br>
+                    <h3 class="explanation-title">＜解説＞</h3>
+                    <span class="corrects-quiz-explanation">
+                        　{{q.explanation|linebreaksbr}}
+                    </span><br>
+                    {% if forloop.counter == 8 %}
+                        <div>
+                            <p><iframe class="embed-movie" width="560" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/WsteGeVM2q8?start=436" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                            補足ですが、動画のような投影方法を立体射影(Stereographic projection)といいます。北極に近づけば近づくほど陸地は大きな面積になります。(北極点を含む北極は面積が無限大になります。)
+                        </div>
+                    {% elif forloop.counter == 9 %}
+                        <div class="embed-field">
+                            ＜メビウスの輪＞
+                            <p><iframe class="embed-movie" width="560" height="315" loading="lazy" src="https://www.youtube.com/embed/l3fFe07AOiY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                            ＜クラインの壺＞
+                            <p><iframe class="embed-movie" width="560" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/yaeyNjUPVqs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                            <p><iframe class="embed-movie" width="560" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/sRTKSzAOBr4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>https://youtu.be/sRTKSzAOBr4</iframe></p>
+                            ＜おまけ＞
+                            <p><iframe class="embed-movie" width="560" height="315" loading="lazy" src="https://www.youtube-nocookie.com/embed/Mz7Q1C1_j_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
