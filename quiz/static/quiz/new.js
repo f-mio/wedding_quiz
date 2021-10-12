@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 previousQuizField.removeAttribute('class', 'quiz-selected');
                 previousQuizField.setAttribute('class', 'quiz-not-selected');
                 let choiceBtns = document.getElementsByName(`answer_${previous_num.innerText}`)
-                choiceBtns.forEach( (Btn) => {
-                    Btn.disabled = true
-                });
+//                choiceBtns.forEach( (Btn) => {
+//                    Btn.disabled = true
+//                });
             });
 
             // 新しく選択したものにnum-selected属性とquiz-selected属性を追加する。

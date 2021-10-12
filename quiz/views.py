@@ -77,7 +77,7 @@ def post(request):
             'quiz_numbers': [i for i in range(1,11)],
             'form' : form
         }
-        return redirect(reverse('quiz:answer'), context)
+        return redirect('/new')
 
     try:
         form = AnswerForm(request.POST)
@@ -85,12 +85,11 @@ def post(request):
         for i in range(10):
             if int(request.POST['answer_{}'.format(i+1)]) == Quiz.objects.get(id=i+1).quiz_correct:
                 point += 1
-#    invitees = Invitees(form)
         invitee = Invitees()
+        invitee.point       = point
         invitee.family_name = request.POST['family_name']
         invitee.first_name  = request.POST['first_name']
         invitee.email       = request.POST['email']
-        invitee.point       = point
         invitee.answer_1    = request.POST['answer_1']
         invitee.answer_2    = request.POST['answer_2']
         invitee.answer_3    = request.POST['answer_3']
@@ -103,11 +102,7 @@ def post(request):
         invitee.answer_10   = request.POST['answer_10']
         invitee.pub_date    = datetime.datetime.now()
         invitee.save()
-        invitee_info = {
-            'invitee': invitee
-        }
-#        return redirect(reverse('quiz:corrects'), invitee_info)
-        return render(request, 'quiz/corrects_invitee.html', invitee_info)
+        return redirect('/corrects')
 
     except:
         form = AnswerForm(request.POST)
