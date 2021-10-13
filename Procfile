@@ -1,0 +1,1 @@
+web: gunicorn wedding_quiz.wsgi --log-file -
