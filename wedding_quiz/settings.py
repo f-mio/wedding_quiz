@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'wedding_quiz.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.posgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'name',
         'USER': 'user',
         'PASSWORD': '',
@@ -141,4 +141,4 @@ if not DEBUG:
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'.update(db_from_env)]
+DATABASES['default'].update(db_from_env)
