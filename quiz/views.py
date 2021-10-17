@@ -7,6 +7,7 @@ from .forms import AnswerForm
 import datetime
 
 
+
 def index(request):
     '''
     This method is used for index page.
