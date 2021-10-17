@@ -23,6 +23,7 @@
     </div>
 
     <form class="index-form" action="{% url 'quiz:index' %}" method="post">
+        {% csrf_token %}
         <ul class="index-comment-form">
             <input type="text" class="comment-name" name="comment-name" placeholder="お名前">
             <textarea class="comment-text" name="comment-text" id="comment-text" placeholder="よろしければメッセージをご記入ください。"></textarea>
