@@ -50,7 +50,10 @@
                         　{{q.quiz_text|linebreaksbr}}
                     </span><br>
                     {% if forloop.counter == 10 %}
-                        <img class="q10-picture" src="{% static 'quiz/q10.png' %}" alt="If you don't see picture, please reload now.">
+                        <br>
+                        <img class="q10-picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Yasaka_jinja.jpg/360px-Yasaka_jinja.jpg" alt="If you can't see picture, please reload now.">
+                        <br>
+                        <img class="q10-picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/%E5%85%AB%E5%9D%82%E7%A5%9E%E7%A4%BE_%E8%88%9E%E6%AE%BF.jpg/360px-%E5%85%AB%E5%9D%82%E7%A5%9E%E7%A4%BE_%E8%88%9E%E6%AE%BF.jpg" alt="If you can't see picture, please reload now.">
                     {% endif %}
             {% endwith %}
                 {{field}}
