@@ -75,8 +75,8 @@
                     <th> お名前 </th>
                 </tr>
             </thead>
-            {% for invitee in invitees %}
             <tbody>
+                {% for invitee in invitees %}
                 <tr>
                     <td class="result-rank">
                         {{forloop.counter}}位
@@ -88,9 +88,9 @@
                         {{invitee.family_name}} {{invitee.first_name}}様
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
-        {% endfor %}
     </div>
 </div>
 
