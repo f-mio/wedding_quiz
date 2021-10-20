@@ -116,7 +116,7 @@ def corrects(request):
     '''
     This method is used to show all corrects of quiz.
     '''
-    quiz     = Quiz.objects.all()
+    quiz     = Quiz.objects.order_by('pub_date').filter
     context = {
         'quiz': quiz,
         'quiz_numbers': [i for i in range(1,11)]
@@ -126,18 +126,48 @@ def corrects(request):
 
 
 # Show all Invitees result.
-def results(request):
+def result(request):
     '''
-    This meshod show all invitees name and points,
+    This method show all invitees name and points,
       and show correct rate graph about each questions.
     '''
     try:
-        invitees = get_object_or_404(Invitees)
+        invitees = Invitees.objects.all().order_by('point').reverse()
+        result_data = get_result_data()
         context = {
-            'invitees': invitees
+            'invitees': invitees,
+            'result_data_x': result_data['column_x'],
+            'result_data_y': result_data['column_y'],
         }
 
     except Invitees.DoesNotExist:
         raise Http404('Invitees do not exist.')
 
-    return render(request, 'quiz/results.html', context)
+    return render(request, 'quiz/result.html', context)
+
+
+def get_result_data():
+    '''
+    This method return dictionary contains 2 arrays.
+       - column_x : quiz number
+       - column_y : correct rate of quiz number
+    '''
+    quiz = Quiz.objects.order_by('pub_date')[:10]
+    invitees = Invitees.objects.all().values()
+
+    column_x = []
+    column_y = []
+    invitees_num = len(invitees)
+    for i in range(10):
+        column_x.append('{}問'.format(i+1))
+        sum_of_correct = 0
+        for invitee in invitees:
+            # クイズの正解と一致している数を足し合わせる。
+            if invitee['answer_{}'.format(i+1)] == quiz[i].quiz_correct:
+                sum_of_correct += 1
+        column_y.append(sum_of_correct / invitees_num * 100)
+    
+    column_x = ','.join([str(title) for title in column_x])
+    column_y = ','.join([str(correct_rate) for correct_rate in column_y])
+
+    return {'column_x': column_x, 'column_y': column_y}
