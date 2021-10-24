@@ -132,8 +132,8 @@ def result(request):
       and show correct rate graph about each questions.
     '''
     try:
-#        invitees = Invitees.objects.all().order_by('point').reverse()
-        invitees = Invitees.objects.all().order_by('point').filter(pub_date__range=['2021-10-23 10:00:00', '2021-10-23 23:59:59']).reverse()
+        invitees = Invitees.objects.all().order_by('point').reverse()
+#        invitees = Invitees.objects.all().order_by('point').filter(pub_date__range=['2021-10-23 10:00:00', '2021-10-23 23:59:59']).reverse()
         result_data = get_result_data()
         context = {
             'invitees': invitees,
@@ -154,8 +154,8 @@ def get_result_data():
        - column_y : correct rate of quiz number
     '''
     quiz = Quiz.objects.order_by('pub_date')[:10]
-#    invitees = Invitees.objects.all().values()
-    invitees = Invitees.objects.filter(pub_date__range=['2021-10-23 10:00:00', '2021-10-23 23:59:59']).values()
+    invitees = Invitees.objects.all().values()
+#    invitees = Invitees.objects.filter(pub_date__range=['2021-10-23 10:00:00', '2021-10-23 23:59:59']).values()
 
     column_x = []
     column_y = []
